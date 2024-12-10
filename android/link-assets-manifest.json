@@ -1,0 +1,121 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/chart.png",
+      "sha1": "ee8762137e8181d25f767977b08ece245285285d"
+    },
+    {
+      "path": "src/assets/chart_colored.png",
+      "sha1": "01077761453e0ef8e5c96f18a31bc8f6a97c7aa6"
+    },
+    {
+      "path": "src/assets/fonts/Roboto/LICENSE.txt",
+      "sha1": "47b573e3824cd5e02a1a3ae99e2735b49e0256e4"
+    },
+    {
+      "path": "src/assets/fonts/Roboto/Roboto-Black.ttf",
+      "sha1": "77f9fac05293485120799e83c16225a1af961f25"
+    },
+    {
+      "path": "src/assets/fonts/Roboto/Roboto-BlackItalic.ttf",
+      "sha1": "69f1818f7701c009b7ff54ab8e737f925c34d714"
+    },
+    {
+      "path": "src/assets/fonts/Roboto/Roboto-Bold.ttf",
+      "sha1": "1e8baa650d943f2b78f1b77dbfe3ba1fb590e21a"
+    },
+    {
+      "path": "src/assets/fonts/Roboto/Roboto-BoldItalic.ttf",
+      "sha1": "4393fed62462cc8dd61175539be68f76398eb743"
+    },
+    {
+      "path": "src/assets/fonts/Roboto/Roboto-Italic.ttf",
+      "sha1": "01593eb48207734fd1e06e1eb91227d1117ba1e7"
+    },
+    {
+      "path": "src/assets/fonts/Roboto/Roboto-Light.ttf",
+      "sha1": "02970068cbc5b4daf5b530e994a5b6f547d03bc1"
+    },
+    {
+      "path": "src/assets/fonts/Roboto/Roboto-LightItalic.ttf",
+      "sha1": "21d6b26b4f9695394cecca173494861024764f80"
+    },
+    {
+      "path": "src/assets/fonts/Roboto/Roboto-Medium.ttf",
+      "sha1": "0ee6b0bd5ff6fe30e4ef720a08e38656dc60985f"
+    },
+    {
+      "path": "src/assets/fonts/Roboto/Roboto-MediumItalic.ttf",
+      "sha1": "19946edc08a323877458a4028d5daecbcb70b0be"
+    },
+    {
+      "path": "src/assets/fonts/Roboto/Roboto-Regular.ttf",
+      "sha1": "ce57fc6c6705cb20661ac325fac5d4598b6efbca"
+    },
+    {
+      "path": "src/assets/fonts/Roboto/Roboto-Thin.ttf",
+      "sha1": "07ade56a94bbca87948ce7878a0b14a1df9bb87a"
+    },
+    {
+      "path": "src/assets/fonts/Roboto/Roboto-ThinItalic.ttf",
+      "sha1": "6a08d5ff3989d2b4a8e960ca0e88e7e0ff104708"
+    },
+    {
+      "path": "src/assets/fonts/trebuchet-ms-2/Trebuchet-MS-Italic.ttf",
+      "sha1": "807e99cb0e684bd28e99a75e45523a24cf493e63"
+    },
+    {
+      "path": "src/assets/fonts/trebuchet-ms-2/trebuc.ttf",
+      "sha1": "07e01f8ff43bd7bb9380d752dc47239de1b5ebd7"
+    },
+    {
+      "path": "src/assets/history.png",
+      "sha1": "da4a79d9c08aed03a003dbc54e90c802ae9de9a9"
+    },
+    {
+      "path": "src/assets/history_colored.png",
+      "sha1": "dfe228f7d35643f8d86a33430dd6ff9d3167dcbd"
+    },
+    {
+      "path": "src/assets/quotes.png",
+      "sha1": "f00072f9e4f1072f0b283514917e619ec33ced0c"
+    },
+    {
+      "path": "src/assets/quotes_colored.png",
+      "sha1": "716a1d1c8960c7b8bce4cf29c7332235ca8bc05d"
+    },
+    {
+      "path": "src/assets/settings.jpeg",
+      "sha1": "bd476344ca172ef20b0728c0e5adfae745540f3d"
+    },
+    {
+      "path": "src/assets/settings.png",
+      "sha1": "bdbc2aa3113b534e0901993e8fc4fc58a65c1f05"
+    },
+    {
+      "path": "src/assets/settings_colored.png",
+      "sha1": "22e5a461e9a349b1b140088b13c9f9a05ab08d30"
+    },
+    {
+      "path": "src/assets/settings_tab.jpeg",
+      "sha1": "e594f6edaa8bd447ac81e71ea6d4f49752fd7bc0"
+    },
+    {
+      "path": "src/assets/trade.jpeg",
+      "sha1": "16fcdef5538a719830374ca4da7435d30f7a74c5"
+    },
+    {
+      "path": "src/assets/trade.png",
+      "sha1": "00a646b4cdfcc0801812283c5119859c10b40c53"
+    },
+    {
+      "path": "src/assets/trade_colored.jpeg",
+      "sha1": "0b8ec1d5f352d6aea83a4b9d0e32f7d2000130b2"
+    },
+    {
+      "path": "src/assets/trade_colored.png",
+      "sha1": "a3b5b9e3f9eaf123027b997c4ff07b48e042dd6d"
+    }
+  ]
+}
