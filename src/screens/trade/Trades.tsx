@@ -1,43 +1,68 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, StatusBar, Platform, Image } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, StatusBar, Platform, FlatList, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CalendarImage from "../../assets/calendar.png";
 
 const Trades = () => {
+  const positions = [
+    { id: '1', symbol: 'BTCUSDm', type: 'sell', lot: 0.01, open: 99901.89, close: 99943.34, profit: -0.41 },
+    { id: '2', symbol: 'BTCUSDm', type: 'buy', lot: 0.01, open: 99921.30, close: 99923.94, profit: 0.03 },
+    { id: '3', symbol: 'BTCUSDm', type: 'buy', lot: 0.01, open: 99924.69, close: 99923.94, profit: -0.01 },
+    // Add more positions here...
+  ];
+
+  const renderPositionItem = ({ item }) => (
+    <View style={styles.positionRow}>
+      <View style={styles.positionDetails}>
+        <Text style={styles.positionSymbol}>
+          {item.symbol} {item.type} {item.lot}
+        </Text>
+        <Text style={styles.positionPrice}>
+          {item.open} → {item.close}
+        </Text>
+      </View>
+      <Text style={[styles.positionProfit, item.profit > 0 ? styles.profitPositive : styles.profitNegative]}>
+        {item.profit.toFixed(2)}
+      </Text>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" />
       {Platform.OS === 'ios' && <View style={{ height: StatusBar.currentHeight || 40 }} />}
-      {/* Header */}
+
+      {/* Fixed Header */}
       <View style={styles.header}>
-        {/* <Icon name="menu-outline" size={24} style={styles.icon} />
-         */}
-         {/* <TradeImage style={styles.icon} /> */}
-         <Image source={CalendarImage} style={styles.icon} />
+        <Image source={CalendarImage} style={styles.icon} />
         <Text style={styles.headerTitle}>USD</Text>
         <Icon name="add-outline" size={24} style={styles.icon} />
       </View>
 
       {/* Scrollable Content */}
-      <ScrollView contentContainerStyle={styles.content}>
-        <View style={styles.infoRow}>
-          <Text style={styles.infoLabel}>Balance:</Text>
-          <Text style={styles.infoValue}>0.00</Text>
-        </View>
-        <View style={styles.infoRow}>
-          <Text style={styles.infoLabel}>Equity:</Text>
-          <Text style={styles.infoValue}>0.00</Text>
-        </View>
-        <View style={styles.infoRow}>
-          <Text style={styles.infoLabel}>Free Margin:</Text>
-          <Text style={styles.infoValue}>0.00</Text>
-        </View>
-
-        {/* Empty State Icon */}
-        <View style={styles.emptyState}>
-          <Icon name="trending-up-outline" size={100} color="#ddd" />
-        </View>
-      </ScrollView>
+      <FlatList
+        ListHeaderComponent={
+          <View style={styles.content}>
+            <View style={styles.infoRow}>
+              <Text style={styles.infoLabel}>Balance:</Text>
+              <Text style={styles.infoValue}>0.00</Text>
+            </View>
+            <View style={styles.infoRow}>
+              <Text style={styles.infoLabel}>Equity:</Text>
+              <Text style={styles.infoValue}>0.00</Text>
+            </View>
+            <View style={styles.infoRow}>
+              <Text style={styles.infoLabel}>Free Margin:</Text>
+              <Text style={styles.infoValue}>0.00</Text>
+            </View>
+            <Text style={styles.sectionTitle}>Positions</Text>
+          </View>
+        }
+        data={positions}
+        renderItem={renderPositionItem}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.positionsList}
+      />
     </View>
   );
 };
@@ -53,28 +78,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 16,
     paddingVertical: 10,
-    // backgroundColor: '#f8f8f8',
+    backgroundColor: '#fff',
     elevation: 2,
+    zIndex: 1,
   },
   headerTitle: {
     fontSize: 18,
     fontWeight: 'bold',
   },
   icon: {
-    color: '#333',
     resizeMode: 'contain',
     width: 24,
     height: 24,
   },
   content: {
-    flexGrow: 1,
     padding: 16,
-    alignItems: 'center',
   },
   infoRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%',
     marginVertical: 5,
   },
   infoLabel: {
@@ -85,11 +107,47 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333',
   },
-  emptyState: {
-    flex: 1,
-    justifyContent: 'center',
+  sectionTitle: {
+    marginTop: 20,
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#333',
+  },
+  positionsList: {
+    paddingBottom: 20,
+  },
+  positionRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 50,
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+  },
+  positionDetails: {
+    flex: 1,
+  },
+  positionSymbol: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  positionPrice: {
+    fontSize: 14,
+    color: '#555',
+  },
+  positionProfit: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'right',
+    minWidth: 50,
+  },
+  profitPositive: {
+    color: 'green',
+  },
+  profitNegative: {
+    color: 'red',
   },
 });
 
