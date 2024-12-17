@@ -1,12 +1,28 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, StatusBar, Platform, Image, TouchableOpacity } from 'react-native';
+import { useApi } from '../../hooks/useApi';
 
 const TradingHistoryScreen = () => {
 
+  const { data, error, isLoading } = useApi<any>({
+    endpoint: '/getAccount',
+    queryOptions: {
+      enabled: true,
+      refetchOnWindowFocus: true,
+      refetchOnMount: true,
+      refetchInterval: 5000,
+    },
+  });
+
+  console.log("=====account===========")
+  console.log(data?.data)
+  console.log("=====account===========")
+
+
   const navigation = useNavigation<any>();
 
-  const data = [
+  const dummydata = [
     //balance
     {pairs:"Balance", type: 'buy', volume: 0.5, profit: 1538.53, priceRange: 'D-Trial-USD-INT-a5ddcfnfbfn', time: '2024.12.05 19:17:39' },
     //balance
@@ -53,7 +69,7 @@ const TradingHistoryScreen = () => {
        
       <ScrollView contentContainerStyle={styles.scrollView}>
         {/* Transaction Data */}
-        {data.map((item, index) => (
+        {dummydata.map((item, index) => (
           <View key={index} style={styles.row}>
             <View style={styles.rowHeader}>
               <Text style={[styles.text, { color: '#000' }]}>

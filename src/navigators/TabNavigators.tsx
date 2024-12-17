@@ -5,12 +5,13 @@ import { Image } from 'react-native';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import HistoryStack from './HistoryStack';
 import TradeStack from './TradeStack';
+import ChartStack from './ChartStack';
 // Tab Navigator
 const Tab = createBottomTabNavigator();
 
 // Example Screens
 const QuotesScreen = () => null;
-const ChartScreen = () => null;
+
 
 
 // Tab Navigator Component
@@ -25,6 +26,7 @@ const TabNavigator = () => {
       'OrderScreen',
       'SettingScreen',
       'HistoryScreen',
+      'ChartScreen'
     ];
 
     if (shownScreens.includes(routeName) || routeName === '') {
@@ -65,7 +67,7 @@ const TabNavigator = () => {
       />
       <Tab.Screen
         name="Chart"
-        component={ChartScreen}
+        component={ChartStack}
         options={{
           title: 'Chart',
           tabBarIcon: ({ focused }) =>

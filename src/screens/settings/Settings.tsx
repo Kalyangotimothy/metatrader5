@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
+import { useApi } from '../../hooks/useApi';
 
 // Import your settings image
 const settingsImage = require('../../assets/settings.jpeg');
@@ -21,8 +22,22 @@ const { height, width } = Dimensions.get('window');
 
 const SettingsScreen = () => {
 
+    const { data, error, isLoading } = useApi<any>({
+      endpoint: '/getAccount',
+      queryOptions: {
+        enabled: true,
+        refetchOnWindowFocus: true,
+        refetchOnMount: true,
+        refetchInterval: 5000,
+      },
+    });
+  
+    console.log("=====history===========")
+    console.log(data?.data)
+    console.log("=====history===========")
+
      const navigation = useNavigation<any>();
-     //onPress={()=>navigation.navigate("AccountsScreen")
+
   return (
     <View style={styles.container}>
       {Platform.OS === 'ios' && (
