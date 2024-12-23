@@ -2,9 +2,20 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, StatusBar, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useApi } from '../../hooks/useApi';
 
 const AccountScreen = () => {
     const navigation = useNavigation<any>();
+        const { data, error, isLoading } = useApi<any>({
+          endpoint: '/getAccount',
+          queryOptions: {
+            enabled: true,
+            refetchOnWindowFocus: true,
+            refetchOnMount: true,
+            refetchInterval: 5000,
+          },
+        });
+        
   return (
     <View style={styles.container}>
               {Platform.OS === 'ios' && (
@@ -17,25 +28,31 @@ const AccountScreen = () => {
         <Text style={styles.headerTitle}>Accounts</Text>
         <Icon name="add" size={24} color="#0D71F3" />
       </View>
+       {
+        data?.data?.map((item, index) => (
+      <TouchableOpacity style={styles.accountItem} activeOpacity={1} 
+       key={index}
+      onPress={()=>navigation.navigate("AccountDetailsScreen", {item})}>
+      {/* Image */}
+      <Image
+        source={{ uri: item?.image }} // Dummy online image
+        style={styles.accountImage}
+      />
+      {/* Account Info */}
+      <View style={styles.accountInfo}>
+        <Text style={styles.accountName}>{item?.name}</Text>
+        <Text style={styles.accountDetails}>
+          {item?.broker}
+        </Text>
+        <Text style={styles.accountDetails}>{item?.amount}, Hedge</Text>
+      </View>
+      {/* Right Arrow Icon */}
+      <Icon name="chevron-forward" size={24} color="gray" />
+    </TouchableOpacity>
+          
+        ))
+       }
 
-      {/* Account Item */}
-      <TouchableOpacity style={styles.accountItem} activeOpacity={1} onPress={()=>navigation.navigate("AccountDetailsScreen")}>
-        {/* Image */}
-        <Image
-          source={{ uri: 'https://d33vw3iu5hs0zi.cloudfront.net/media/sm_Exness_Rebrand_Blog_Thumbnail_f465cad43d.jpg?w=1200' }} // Dummy online image
-          style={styles.accountImage}
-        />
-        {/* Account Info */}
-        <View style={styles.accountInfo}>
-          <Text style={styles.accountName}>Giant Hunter AI Robot</Text>
-          <Text style={styles.accountDetails}>
-            187744963 - Exness-MT5Real27
-          </Text>
-          <Text style={styles.accountDetails}>0.00 USD, Hedge</Text>
-        </View>
-        {/* Right Arrow Icon */}
-        <Icon name="chevron-forward" size={24} color="gray" />
-      </TouchableOpacity>
     </View>
   );
 };
@@ -78,11 +95,11 @@ const styles = StyleSheet.create({
   accountName: {
     fontSize: 16,
     // fontWeight: 'bold',
-    color: 'black',
+    color: '#000',
   },
   accountDetails: {
     fontSize: 14,
-    color: 'gray',
+    color: '#000',
   },
 });
 

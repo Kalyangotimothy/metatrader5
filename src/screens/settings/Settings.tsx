@@ -32,9 +32,6 @@ const SettingsScreen = () => {
       },
     });
   
-    console.log("=====history===========")
-    console.log(data?.data)
-    console.log("=====history===========")
 
      const navigation = useNavigation<any>();
 
@@ -54,15 +51,15 @@ const SettingsScreen = () => {
       <ScrollView style={styles.scrollContainer} >
         <TouchableOpacity activeOpacity={1} onPress={()=>navigation.navigate("AccountsScreen")}>
         <TouchableOpacity style={styles.detailsContainer} activeOpacity={1} onPress={()=>{
-             console.log("clicked")
+             return navigation.navigate("AccountsScreen")
         }}>
           {/* Text Content */}
           <View>
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
-            <Text style={styles.title}>Giant Hunter AI NFP</Text>
-            <Text style={styles.subTitle}>Exness Technologies Ltd</Text>
+            <Text style={styles.title}>{data?.data[0]?.name}</Text>
+            <Text style={styles.subTitle}>{data?.data[0]?.broker}</Text>
             <Text style={styles.details}>
-              207491387 - Exness-MT5Trial9{'\n'}Access Point #3
+              {data?.data[0]?.server}{'\n'}{data?.data[0]?.access_point}
             </Text>
             </View>
 

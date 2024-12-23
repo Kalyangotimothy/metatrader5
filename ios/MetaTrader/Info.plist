@@ -68,6 +68,32 @@
 		<string>Roboto-Regular.ttf</string>
 		<string>Roboto-Thin.ttf</string>
 		<string>Roboto-ThinItalic.ttf</string>
+		<string>PlaywriteCOGuides-Regular.ttf</string>
+		<string>Trebuchet MS Italic.ttf</string>
+		<string>Trebuchet-MS-Bold-Italic.ttf</string>
+		<string>Trebuchet-MS-Bold.ttf</string>
+		<string>Trebuchet-MS.ttf</string>
+		<string>RobotoCondensed-Italic-VariableFont_wght.ttf</string>
+		<string>RobotoCondensed-VariableFont_wght.ttf</string>
+		<string>RobotoCondensed-Black.ttf</string>
+		<string>RobotoCondensed-BlackItalic.ttf</string>
+		<string>RobotoCondensed-Bold.ttf</string>
+		<string>RobotoCondensed-BoldItalic.ttf</string>
+		<string>RobotoCondensed-ExtraBold.ttf</string>
+		<string>RobotoCondensed-ExtraBoldItalic.ttf</string>
+		<string>RobotoCondensed-ExtraLight.ttf</string>
+		<string>RobotoCondensed-ExtraLightItalic.ttf</string>
+		<string>RobotoCondensed-Italic.ttf</string>
+		<string>RobotoCondensed-Light.ttf</string>
+		<string>RobotoCondensed-LightItalic.ttf</string>
+		<string>RobotoCondensed-Medium.ttf</string>
+		<string>RobotoCondensed-MediumItalic.ttf</string>
+		<string>RobotoCondensed-Regular.ttf</string>
+		<string>RobotoCondensed-SemiBold.ttf</string>
+		<string>RobotoCondensed-SemiBoldItalic.ttf</string>
+		<string>RobotoCondensed-Thin.ttf</string>
+		<string>RobotoCondensed-ThinItalic.ttf</string>
+		<string>micross 2.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
