@@ -34,7 +34,7 @@ const TradingHistoryScreen = () => {
 
       </TouchableOpacity>
 
-      <ScrollView contentContainerStyle={styles.scrollView}>
+      <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false}>
         {/* Transaction Data */}
         {data?.data?.map((item, index) => (
           <View key={index} style={styles.row}>
@@ -42,14 +42,14 @@ const TradingHistoryScreen = () => {
               <Text style={[styles.text, { color: '#000' }]}>
                 {item.pairs} {' '}
                 {item.pairs !== 'Balance' && (
-                  <Text style={{ color: item.type === 'buy' ? '#0D71F3' : '#DE4949' }}>{item?.type} {item?.volume}</Text>
+                  <Text style={{ color: item.type === 'buy' ? '#0D71F3' : '#EE0000' }}>{item?.type} {item?.volume}</Text>
 
                 )}
               </Text>
               <Text
                 style={[
                   styles.profit,
-                  { color: item.profit < 0 ? '#DE4949' : '#0D71F3' }
+                  { color: item.profit < 0 ? '#EE0000' : '#0D71F3' }
                 ]}
               >
                 {parseFloat(item?.profit?.toFixed(2))}
@@ -99,13 +99,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   text: {
-    fontSize: 15.5,
+    fontSize: 16.5,
     fontWeight: '700',
     fontFamily: "RobotoCondensed-SemiBold",
     transform: [{ scaleY: 1.3 }]
   },
   profit: {
-    fontSize: 14.5,
+    fontSize: 18,
     fontWeight: 'bold',
     // letterSpacing: 1.2,
     fontFamily: "RobotoCondensed-SemiBold",

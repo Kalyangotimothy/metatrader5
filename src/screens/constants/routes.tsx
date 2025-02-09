@@ -1,1 +1,3 @@
-export const BASE_URL = "https://metatrader.giantpips.com/api";
+export const BASE_URL = "https://metatrader.gianthunterai.com/api";
+
+//https://metatrader.gianthunterai.com/admin

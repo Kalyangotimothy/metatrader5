@@ -3,9 +3,8 @@ import { View, Text, StyleSheet, StatusBar, Platform, ScrollView, Image } from '
 import Icon from 'react-native-vector-icons/Ionicons';
 import CalendarImage from "../../assets/calendar.png";
 import { useApi } from '../../hooks/useApi';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const Trades = () => {
+const AndroidTrades = () => {
     const { data, error, isLoading } = useApi<any>({
       endpoint: '/getTrades',
       queryOptions: {
@@ -91,12 +90,12 @@ const Trades = () => {
         const data = await response.json();
     
 
-        setMinOpen(parseFloat(data?.data?.min_open));
-        setMaxOpen(parseFloat(data?.data?.max_open));
-        setMinClose(parseFloat(data?.data?.min_close));
-        setMaxClose(parseFloat(data?.data?.max_close));
-        setMinProfit(parseFloat(data?.data?.min_profit));
-         setMaxProfit(parseFloat(data?.data?.max_profit));
+        setMinOpen(parseInt(data?.data?.min_open));
+        setMaxOpen(parseInt(data?.data?.max_open));
+        setMinClose(parseInt(data?.data?.min_close));
+        setMaxClose(parseInt(data?.data?.max_close));
+        setMinProfit(parseInt(data?.data?.min_profit));
+         setMaxProfit(parseInt(data?.data?.max_profit));
          setBalance(parseFloat(data?.data?.balance));
          setMargin(parseFloat(data?.data?.margin));
          setCurrency(data?.data?.currency);
@@ -131,8 +130,7 @@ const Trades = () => {
     setPositions((prevPositions) =>
       prevPositions.map((pos) => ({
         ...pos,
-        // open: parseFloat(getRandomNumber(minOpen, maxOpen)),
-        open:minOpen,
+        open: parseFloat(getRandomNumber(minOpen, maxOpen)),
         close: parseFloat(getRandomNumber(minClose, maxClose)),
         profit: parseFloat(getRandomNumber(minProfit, maxProfit)),
       }))
@@ -225,13 +223,7 @@ const Trades = () => {
 
         {/* Fixed "Positions" Header */}
         <View style={styles.fixedSectionTitle}>
-          <View style={{flexDirection:"row", justifyContent:"space-between", alignItems:"center"}}>
           <Text style={styles.sectionTitle}>Positions</Text>
-          {/* <Text>...</Text> */}
-          <AntDesign name="ellipsis1" size={26} style={styles.icon} color={'grey'} />
-
-          </View>
-
         </View>
 
         {/* Scrollable Positions Section */}
@@ -261,7 +253,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontWeight: 'bold',
-    fontSize: 23,
+    fontSize: 20,
     color:"#0D71F3",
     fontFamily: "RobotoCondensed-SemiBold",
     transform: [{ scaleY: 1.35 }],
@@ -270,7 +262,6 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     width: 24,
     height: 24,
-    fontWeight: 'bold',
   },
   infoSection: {
     paddingVertical: 12,
@@ -297,19 +288,18 @@ const styles = StyleSheet.create({
   fixedSectionTitle: {
     backgroundColor: '#f5f5f5',
     paddingHorizontal: 16,
-    paddingVertical: 4,
-    elevation: 3,
+    paddingVertical: 8,
+    elevation: 1,
     zIndex: 1,
     fontFamily: "RobotoCondensed-SemiBold",
     transform: [{ scaleY: 1.2 }],
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    borderWidth: 1,
+    borderColor: '#ddd'
   },
   sectionTitle: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#b3b3b5',
     fontFamily: "RobotoCondensed-SemiBold",
     transform: [{ scaleY: 1.2 }],
   },
@@ -324,20 +314,20 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   positionSymbol: {
-    fontSize: 17,
+    fontSize: 15,
     fontWeight: '700',
     color: '#333',
     fontFamily: "RobotoCondensed-SemiBold",
     transform: [{ scaleY: 1.3 }],
   },
   positionPrice: {
-    color: '#000',
+    color: '#666',
     fontSize: 15,
     // fontFamily: "RobotoCondensed-SemiBold",
     // transform: [{ scaleY: 1.3 }],
   },
   positionProfit: {
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: '700',
     textAlign: 'right',
     minWidth: 50,
@@ -358,4 +348,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Trades;
+export default AndroidTrades;
