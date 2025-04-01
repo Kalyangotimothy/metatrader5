@@ -12,6 +12,16 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+const formatBalance = (value) => {
+  return new Intl.NumberFormat('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+    useGrouping: true,
+  })
+    .format(value)
+    .replace(/,/g, ' '); // Replace commas with spaces
+};
+
 const AccountDetailsScreen = () => {
   const navigation = useNavigation<any>();
 

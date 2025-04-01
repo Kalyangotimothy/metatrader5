@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, StatusBar, Platform, Image, TouchableOpacity } from 'react-native';
 import { useApi } from '../../hooks/useApi';
 import Summary from '../../component/Summary';
@@ -18,7 +18,20 @@ const TradingHistoryScreen = () => {
 
   const navigation = useNavigation<any>();
 
-  
+  // const [totalProfit , setTotalProfile] =  useState<any>(0)
+  const [totalProfit, setTotalProfit] = useState<number>(0);
+
+  useEffect(() => {
+    if (data?.data) {
+      const total = data.data
+        .filter((item: any) => item.pairs !== 'Balance') // Exclude 'Balance' pairs
+        .reduce((sum: number, item: any) => sum + (item.profit || 0), 0); // Sum profits
+
+      setTotalProfit(parseFloat(total.toFixed(2))); // Format to 2 decimal places
+    }
+  }, [data]); // Runs when `data` changes
+
+  // console.log('totalProfit', totalProfit)
 
  
 
@@ -63,7 +76,7 @@ const TradingHistoryScreen = () => {
         ))}
 
         {/* Summary */}
-        <Summary/>
+        <Summary totalProfit={totalProfit}/>
         {/* summary */}
       </ScrollView>
     </View>
@@ -86,7 +99,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   row: {
-    marginBottom: 8,
+    marginBottom: 5,
     paddingVertical: 5,
   },
   rowHeader: {
@@ -94,29 +107,29 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   rowFooter: {
-    marginTop: 4,
+    marginTop: 2.5,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   text: {
-    fontSize: 16.5,
+    fontSize: 16.25,
     fontWeight: '700',
     fontFamily: "RobotoCondensed-SemiBold",
-    transform: [{ scaleY: 1.3 }]
+    transform: [{ scaleY: 1.2 }]
   },
   profit: {
-    fontSize: 18,
+    fontSize: 19,
     fontWeight: 'bold',
     // letterSpacing: 1.2,
     fontFamily: "RobotoCondensed-SemiBold",
-    transform: [{ scaleY: 1.4 }],
+    transform: [{ scaleY: 1.43 }],
   },
   subText: {
     fontSize: 12,
     color: 'gray',
     // fontFamily: "trebuc",
-    fontFamily: "RobotoCondensed-SemiBold",
-    transform: [{ scaleY: 1.2 }],
+    fontFamily: "trebuc",
+    transform: [{ scaleY: 1.25 }],
   },
   summary: {
     marginTop: 5,
@@ -129,7 +142,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '400',
     color: '#000',
-    fontFamily: "trebuc",
+    fontFamily: "RobotoCondensed-SemiBold",
     // textAlign: 'center',
     justifyContent: "space-between",
     marginBottom: 6,
@@ -139,7 +152,7 @@ const styles = StyleSheet.create({
     // fontWeight: 'bold',
     color: '#000',
     // fontFamily: "trebuc",
-    fontFamily: "RobotoCondensed-SemiBold",
+    fontFamily: "trebuc",
     transform: [{ scaleY: 1.2 }],
   },
   value: {
@@ -147,7 +160,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#000',
     // fontFamily: "trebuc",
-    fontFamily: "RobotoCondensed-SemiBold",
+    fontFamily: "trebuc",
     transform: [{ scaleY: 1.2 }],
   },
 });

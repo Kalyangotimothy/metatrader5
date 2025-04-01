@@ -4,6 +4,15 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, StatusBar, Platform } 
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useApi } from '../../hooks/useApi';
 
+const formatBalance = (value:any) => {
+  return new Intl.NumberFormat('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+    useGrouping: true,
+  })
+    .format(value)
+    .replace(/,/g, ' '); // Replace commas with spaces
+};
 const AccountScreen = () => {
     const navigation = useNavigation<any>();
         const { data, error, isLoading } = useApi<any>({

@@ -1,8 +1,18 @@
 import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { useApi } from '../hooks/useApi';
 
-export default function Summary() {
+const formatBalance = (value) => {
+    return new Intl.NumberFormat('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+      useGrouping: true,
+    })
+      .format(value)
+      .replace(/,/g, ' '); // Replace commas with spaces
+  };
+
+export default function Summary({totalProfit}:any) {
 
       const { data, error, isLoading } = useApi<any>({
         endpoint: '/getTradingSummary',
@@ -14,32 +24,34 @@ export default function Summary() {
         },
       });
 
+
+
       
     return (
         <View style={[styles.summary, { marginVertical: 30, borderTopColor: '#DDD', borderBottomColor: '#DDD', borderTopWidth: 1, borderBottomWidth: 1 }]}>
             <View style={styles.centeredText}>
                 <Text style={styles.label}>Deposit</Text>
-                <Text style={styles.value}>{data?.data?.deposit}</Text>
+                <Text style={styles.value}>{formatBalance(data?.data?.deposit)}</Text>
             </View>
             <View style={styles.centeredText}>
                 <Text style={styles.label}>Withdrawal</Text>
-                <Text style={styles.value}>{data?.data?.withdrawal}</Text>
+                <Text style={styles.value}>{formatBalance(data?.data?.withdrawal)}</Text>
             </View>
             <View style={styles.centeredText}>
                 <Text style={styles.label}>Profit</Text>
-                <Text style={styles.value}>{data?.data?.profit}</Text>
+                <Text style={styles.value}>{formatBalance(totalProfit)}</Text>
             </View>
             <View style={styles.centeredText}>
                 <Text style={styles.label}>Swap</Text>
-                <Text style={styles.value}>{data?.data?.swap}</Text>
+                <Text style={styles.value}>{formatBalance(data?.data?.swap)}</Text>
             </View>
             <View style={styles.centeredText}>
                 <Text style={styles.label}>Commission</Text>
-                <Text style={styles.value}>{data?.data?.commission}</Text>
+                <Text style={styles.value}>{formatBalance(data?.data?.commission)}</Text>
             </View>
             <View style={styles.centeredText}>
                 <Text style={styles.label}>Balance</Text>
-                <Text style={styles.value}>{data?.data?.balance}</Text>
+                <Text style={styles.value}>{formatBalance(parseFloat(data?.data?.deposit) + parseFloat(totalProfit))}</Text>
             </View>
         </View>
     )
@@ -75,7 +87,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 14.5,
-        fontWeight: '700',
+        fontWeight: '500',
         // letterSpacing: 2,
         // transform: [{ scaleX: 2.5 }],
         //lineHeight: 40,
