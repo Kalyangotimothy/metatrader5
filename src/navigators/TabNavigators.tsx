@@ -8,6 +8,7 @@ import TradeStack from './TradeStack';
 import ChartStack from './ChartStack';
 import QuotsScreen from '../screens/QuotsScreen';
 import Messages from '../screens/Messages';
+import AccountDetails from '../screens/drawer/AccountDetails';
 
 
 // Tab Navigator

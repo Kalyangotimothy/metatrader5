@@ -7,10 +7,11 @@ import {
     Image,
     ScrollView,
   } from 'react-native';
-  import React from 'react';
+  import React, { useEffect, useState } from 'react';
   import { useNavigation } from '@react-navigation/native';
 import SummaryCard from '../../component/SummaryCard';
 import TradeListScreen from '../../component/TradeListScreen';
+import { useApi } from '../../hooks/useApi';
   
   export default function AndroidHistory() {
     const navigation = useNavigation();
@@ -44,25 +45,64 @@ import TradeListScreen from '../../component/TradeListScreen';
       },
       // Add more transactions if needed
     ];
+
+    const { data, error, isLoading } = useApi<any>({
+      endpoint: '/getHistory',
+      queryOptions: {
+        enabled: true,
+        refetchOnWindowFocus: true,
+        refetchOnMount: true,
+        refetchInterval: 5000,
+      },
+    });
+  
+
+  
+    // const [totalProfit , setTotalProfile] =  useState<any>(0)
+    const [totalProfit, setTotalProfit] = useState<number>(0);
+  
+    useEffect(() => {
+      if (data?.data) {
+        const total = data.data
+          .filter((item: any) => item.pairs !== 'Balance') // Exclude 'Balance' pairs
+          .reduce((sum: number, item: any) => sum + (item.profit || 0), 0); // Sum profits
+  
+        setTotalProfit(parseFloat(total.toFixed(2))); // Format to 2 decimal places
+      }
+    }, [data]); // Runs when `data` changes
+  
+    // console.log('totalProfit', totalProfit)
   
     return (
       <View style={styles.container}>
         <StatusBar barStyle="dark-content" />
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => navigation.navigate('HistoryDaysScreen')}
+          // onPress={() => navigation.navigate('HistoryDaysScreen')}
+          onPress={()=>navigation.openDrawer()}
         >
           <Image
-            source={require('../../assets/androhistory_header.jpeg')}
+            source={require('../../assets/androidheader.jpeg')}
             style={styles.headerImage}
           />
         </TouchableOpacity>
   
         <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false}>
           {/* Summary Section */}
-         <SummaryCard/>
-  
-           <TradeListScreen/>
+           {
+            !isLoading && (
+              <SummaryCard totalProfit={totalProfit}/>
+            )
+           }
+
+   
+        {
+          !isLoading && (
+            // <Text>Loading...</Text>
+            <TradeListScreen data={data?.data}/>
+          )
+        }
+
         </ScrollView>
       </View>
     );

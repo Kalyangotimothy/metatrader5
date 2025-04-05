@@ -2,35 +2,43 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useApi } from '../hooks/useApi';
 
-const TradeListScreen = () => {
-  const trades = [
-    { pair: 'USDJPYm', type: 'buy', lotSize: 0.02, open: 157.374, close: 157.169, time: '2024.12.20 05:33:58', profit: -2.61 },
-    { pair: 'USDJPYm', type: 'sell', lotSize: 0.02, open: 157.374, close: 157.169, time: '2024.12.20 05:33:57', profit: -2.61 },
-    { pair: 'USDJPYm', type: 'buy', lotSize: 0.02, open: 157.374, close: 157.170, time: '2024.12.20 05:33:59', profit: -2.60 },
-    { pair: 'USDJPYm', type: 'sell', lotSize: 0.02, open: 157.374, close: 157.170, time: '2024.12.20 05:33:59', profit: -2.60 },
-  ];
+const TradeListScreen = ({data}:any) => {
+  
 
-    const { data, error, isLoading } = useApi<any>({
-      endpoint: '/getHistory',
-      queryOptions: {
-        enabled: true,
-        refetchOnWindowFocus: true,
-        refetchOnMount: true,
-        refetchInterval: 5000,
-      },
-    });
+    // const { data, error, isLoading } = useApi<any>({
+    //   endpoint: '/getHistory',
+    //   queryOptions: {
+    //     enabled: true,
+    //     refetchOnWindowFocus: true,
+    //     refetchOnMount: true,
+    //     refetchInterval: 5000,
+    //   },
+    // });
 
 
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {data?.data?.map((item, index) => (
-        <View key={index} style={styles.row}>
+      {data?.map((item, index) => (
+        <View key={index} style={[
+          styles.row,
+          index === 0 && styles.firstRow
+        ]}>
           <View style={styles.leftSection}>
-            <Text style={styles.pair}>
-              {item?.pairs}, <Text style={[styles.type, item?.type === 'sell' && styles.sell]}>{item?.type} {item?.volume}</Text>
-            </Text>
-            <Text style={styles.prices}>
+          <Text style={[styles.pair, { color: '#000' }]}>
+                {item.pairs} {' '}
+                {item.pairs !== 'Balance' && (
+                  <Text style={{
+                     color: item.type === 'buy' ? '#0D71F3' : '#EE0000' ,
+                      fontSize:13 ,
+                       fontWeight:"100"
+
+                  }}>{item?.type} {item?.volume}</Text>
+
+                )}
+              </Text>
+            <Text style={[styles.prices,item.pairs=='Balance'&&{    fontSize: 10,
+    color: '#666',}  ]}>
               {item?.price_range}
             </Text>
           </View>
@@ -86,14 +94,15 @@ const styles = StyleSheet.create({
     fontFamily: "trebuc",
   },
   prices: {
-    fontSize: 14.5,
+    fontSize: 13,
     color: '#666',
     fontFamily: "RobotoCondensed-SemiBold",
-    transform: [{ scaleY: 1.3 }],
+    transform: [{ scaleY: 1.1 }],
   },
   rightSection: {
     alignItems: 'flex-end',
     flex: 1,
+    // paddingBottom:2
   },
   time: {
     fontSize: 12,
@@ -102,12 +111,17 @@ const styles = StyleSheet.create({
     transform: [{ scaleY: 1.3 }],
   },
   profit: {
-    fontSize: 14,
+    fontSize: 12,
     color: '#000',
     fontWeight: 'bold',
     fontFamily: "RobotoCondensed-SemiBold",
     transform: [{ scaleY: 1.3 }],
+    paddingTop:2
   },
+  firstRow: {
+      borderTopWidth: 1,
+      borderTopColor: '#ddd',
+    },
 });
 
 export default TradeListScreen;

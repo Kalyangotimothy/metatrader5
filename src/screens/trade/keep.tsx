@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, StatusBar, Platform, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, StatusBar, Platform, ScrollView, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import AndroidImage from "../../assets/android_image.png";
-import OneImage from "../../assets/one.png";
-import TwoImage from "../../assets/two.png";
-import ThreeImage from "../../assets/three.png"
+import CalendarImage from "../../assets/calendar.png";
 import { useApi } from '../../hooks/useApi';
-import { useNavigation } from '@react-navigation/native';
 
 const AndroidTrades = () => {
-   const navigation = useNavigation();
-   
   const { data, error, isLoading } = useApi<any>({
     endpoint: '/getTrades',
     queryOptions: {
@@ -258,14 +252,14 @@ const AndroidTrades = () => {
       {Platform.OS === 'ios' && <View style={{ height: StatusBar.currentHeight || 40 }} />}
 
       {/* Fixed Header */}
-      <TouchableOpacity style={styles.header} activeOpacity={1} onPress={()=>navigation.openDrawer()}>
+      <View style={styles.header}>
         <View style={styles.headerLeft}>
-          <Icon name="menu" size={24} color="#000"  />
+          <Icon name="menu" size={24} color="#000" />
           <View style={styles.headerTitleContainer}>
             <Text style={styles.headerLabel}>Trade</Text>
             <Text style={[styles.headerTitle, 
-            total < 0 && { color: '#DE4949', fontSize:13 },
-            total>0&&{fontSize:13}
+            total < 0 && { color: '#DE4949', fontSize:15 },
+            total>0&&{fontSize:14}
 
             ]}>
               {total < 0 ? '-' : ''}{formatBalance(Math.abs(total))} {currency}
@@ -273,11 +267,11 @@ const AndroidTrades = () => {
           </View>
         </View>
         <View style={styles.headerRight}>
-           <Image source={OneImage} style={styles.icon} />
-           <Image source={TwoImage} style={styles.icon} />
-           <Image source={ThreeImage} style={styles.icon} />
+           <Image source={CalendarImage} style={styles.icon} />
+          <Icon name="swap-vertical" size={24} color="#666" />
+          <Icon name="document-text-outline" size={24} color="#666" style={{ marginLeft: 15 }} />
         </View>
-      </TouchableOpacity>
+      </View>
 
       {/* Scrollable Content */}
       <ScrollView 
@@ -289,27 +283,22 @@ const AndroidTrades = () => {
         <View style={styles.infoSection}>
           <View style={styles.infoRow}>
             <Text style={styles.infoLabel}>Balance:</Text>
-            <Text style={styles.dotText}>{'. '.repeat(30)}</Text>
             <Text style={styles.infoValue}>{formatBalance(parseFloat(balance))}</Text>
           </View>
           <View style={styles.infoRow}>
             <Text style={styles.infoLabel}>Equity:</Text>
-            <Text style={styles.dotText}>{'. '.repeat(30)}</Text>
             <Text style={styles.infoValue}>{formatBalance(parseFloat(total) + parseFloat(balance))}</Text>
           </View>
           <View style={styles.infoRow}>
             <Text style={styles.infoLabel}>Margin:</Text>
-            <Text style={styles.dotText}>{'. '.repeat(30)}</Text>
             <Text style={styles.infoValue}>{formatBalance(parseFloat(balance)/9.8)}</Text>
           </View>
           <View style={styles.infoRow}>
             <Text style={styles.infoLabel}>Free Margin:</Text>
-            <Text style={styles.dotText}>{'. '.repeat(25)}</Text>
             <Text style={styles.infoValue}>{formatBalance((parseFloat(total) + parseFloat(balance))-(parseFloat(balance)/9.8*0.24))}</Text>
           </View>
           <View style={styles.infoRow}>
             <Text style={styles.infoLabel}>Margin Level (%):</Text>
-            <Text style={styles.dotText}>{'. '.repeat(24)}</Text>
             <Text style={styles.infoValue}>{formatBalance(((parseFloat(total) + parseFloat(balance))*100) / (parseFloat(balance)/9.8))}</Text>
           </View>
         </View>
@@ -346,21 +335,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  // header: {
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  //   alignItems: 'center',
-  //   paddingHorizontal: 16,
-  //   paddingVertical: 10,
-  //   backgroundColor: '#fff',
-  //   // elevation: 2,
-  //   zIndex: 1,
-  //   // marginTop:-100
-  // },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    backgroundColor: '#fff',
+    // elevation: 2,
+    zIndex: 1,
+  },
   headerLeft: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop:-50
   },
   headerTitleContainer: {
     marginLeft: 15,
@@ -370,78 +357,53 @@ const styles = StyleSheet.create({
     color: '#000',
     fontWeight: '500',
   },
-  // headerTitle: {
-  //   fontSize: 10,
-  //   fontWeight: 'bold',
-  //   color: '#000',
-  // },
+  headerTitle: {
+    fontSize: 10,
+    fontWeight: 'bold',
+    color: '#000',
+  },
   headerRight: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginLeft:105,
-    marginTop:-30
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 16,
-    //  height:80,
-    paddingTop: 40,
+    paddingVertical: 10,
     backgroundColor: '#fff',
     // elevation: 2,
     zIndex: 1,
-     marginTop: 10
+    marginTop: 10
   },
   headerTitle: {
-    // fontWeight: 'bold',
-    fontSize: 18,
+    fontWeight: 'bold',
+    fontSize: 20,
     color: "#0D71F3",
-    //fontFamily: "RobotoCondensed-SemiBold",
+    fontFamily: "RobotoCondensed-SemiBold",
     transform: [{ scaleY: 1.35 }],
   },
   icon: {
     resizeMode: 'contain',
     width: 24,
     height: 24,
-    fontWeight: 'bold',
-    marginHorizontal:10
-    // marginHorizontal:15
+    marginHorizontal:15
   },
   infoSection: {
-    paddingVertical: 10,
+    paddingVertical: 12,
     paddingHorizontal: 5,
-    marginHorizontal:5,
-    // marginTop:-10
   },
   infoRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
     marginVertical: 2,
-  },
-  dottedLine: {
-    // flex: 0.5,
-    height: 1,
-    borderStyle: 'dotted',
-    borderWidth: 1,
-    borderColor: '#ccc',
-    marginHorizontal: 8,
-  },
-  dotText: {
-    flex:1,
-    fontSize: 15,
-    color: '#ddd',
-    textAlign: 'center',
-     fontFamily: "RobotoCondensed-SemiBold",
-    transform: [{ scaleY: 1.2 }],
-
   },
   infoLabel: {
     color: '#000',
     fontSize: 14.5,
-     fontFamily: "RobotoCondensed-SemiBold",
-    transform: [{ scaleY: 1.1 }],
+    //  fontFamily: "RobotoCondensed-SemiBold",
+    transform: [{ scaleY: 1.2 }],
   },
   infoValue: {
     fontSize: 13,
@@ -453,7 +415,7 @@ const styles = StyleSheet.create({
   fixedSectionTitle: {
     backgroundColor: '#f5f5f5',
     paddingHorizontal: 16,
-    paddingVertical: 6,
+    paddingVertical: 12,
     elevation: 1,
     zIndex: 1,
     borderWidth: 1,
@@ -465,13 +427,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#b3b3b5',
     fontFamily: "RobotoCondensed-SemiBold",
-    transform: [{ scaleY: 1.0 }],
+    transform: [{ scaleY: 1.2 }],
   },
   positionRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 1,
+    paddingVertical: 4,
     paddingHorizontal: 5,
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
@@ -482,12 +444,6 @@ const styles = StyleSheet.create({
   },
   positionDetails: {
     flex: 1,
-    color: '#e6e6e6',
-    letterSpacing: 2,
-    fontSize: 12,
-    textAlign: 'center',
-    marginHorizontal: 8,
-    paddingTop: 3,
   },
   positionSymbol: {
     fontSize: 15,
@@ -499,8 +455,8 @@ const styles = StyleSheet.create({
   positionPrice: {
     color: '#666',
     fontSize: 15,
-     fontFamily: "RobotoCondensed-SemiBold",
-     transform: [{ scaleY: 1.1 }],
+    // fontFamily: "RobotoCondensed-SemiBold",
+    // transform: [{ scaleY: 1.3 }],
   },
   positionProfit: {
     fontSize: 15,
@@ -508,11 +464,11 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     minWidth: 50,
     fontFamily: "RobotoCondensed-SemiBold",
-    transform: [{ scaleY: 1.0 }],
+    transform: [{ scaleY: 1.1 }],
   },
   profitPositive: {
     color: '#0D71F3',
-    fontSize: 15,
+    fontSize: 18,
     fontFamily: "RobotoCondensed-SemiBold",
     transform: [{ scaleY: 1.1 }],
   },

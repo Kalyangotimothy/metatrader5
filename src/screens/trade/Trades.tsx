@@ -215,7 +215,8 @@ const Trades = () => {
           {/* {item.lot} */}
         </Text>
         <Text style={styles.positionPrice}>
-          {item.open} → {item.close}
+          {/* {item.open} → {item.close} */}
+          {item?.open} → {!isNaN(item?.close) ? item?.close : item?.open}
         </Text>
       </View>
       <Text

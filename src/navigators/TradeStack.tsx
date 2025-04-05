@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Trades from '../screens/trade/Trades';
 import AndroidTrades from '../screens/trade/AndroidTrades';
 import { Platform } from 'react-native';
+import AccountDetails from '../screens/drawer/AccountDetails';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +34,16 @@ export default function TradeStack() {
         }}
       />
 
+<Stack.Screen
+        name="ManageAccount"
+        component={AccountDetails}
+        options={{
+          // animation: 'slide_from_bottom',
+          headerShown: false,
+          presentation: 'containedModal',  // This ensures the screen is contained within the tab layout
+          tabBarVisible: true,  // Explicitly keep the tab bar visible
+        }}
+      />
 
     </Stack.Navigator>
   )

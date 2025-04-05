@@ -69,7 +69,9 @@ const TradingHistoryScreen = () => {
               </Text>
             </View>
             <View style={styles.rowFooter}>
-              <Text style={styles.subText}>{item?.price_range}</Text>
+              <Text style={styles.subText}>{
+              item?.price_range
+                }</Text>
               <Text style={styles.subText}>{item?.time}</Text>
             </View>
           </View>
